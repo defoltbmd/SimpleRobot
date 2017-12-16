@@ -10,5 +10,5 @@ public abstract class MoveComand {
 
     public abstract void execute();
     public MoveComandDelegate delegate;
-    protected AbstractRobot robot;
+    public AbstractRobot robot;
 }

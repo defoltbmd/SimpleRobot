@@ -4,6 +4,7 @@ import model.AbstractRobot;
 import model.DirectionRobot;
 import model.comand.*;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 import static java.lang.Math.abs;
@@ -11,6 +12,7 @@ import static java.lang.Math.abs;
 //we won't separate use queue class for simplicity
 public class ComandInvoker extends Thread implements MoveComandDelegate {
     private ArrayList<MoveComand> comands;
+    private Point lastPoint;
     public iComandInvokerDelegate delegate;
 
     public ComandInvoker() {
@@ -22,6 +24,10 @@ public class ComandInvoker extends Thread implements MoveComandDelegate {
         super.run();
         if (comands != null && comands.size() > 0) {
             MoveComand comand = comands.get(0);
+            if(comand.robot.getX() != 0 && comand.robot.getY() !=0) {
+                lastPoint.x = comand.robot.getX();
+                lastPoint.y = comand.robot.getY();
+            }
             comand.execute();
             comands.remove(0);
             try {
@@ -32,13 +38,14 @@ public class ComandInvoker extends Thread implements MoveComandDelegate {
             this.run();
         } else {
             if (delegate != null) {
-                delegate.didFinishedQueue();
+                delegate.didFinishedQueue(lastPoint);
             }
         }
 
     }
 
     public void invoke() {
+        lastPoint = new Point();
         this.start();
         /*
         for (MoveComand comand : comands) {

@@ -3,11 +3,10 @@ package controller;
 import model.AbstractRobot;
 import model.DirectionRobot;
 import model.RobotBuilder;
-import model.comand.MoveForwardComand;
-import model.comand.RotateLeftComand;
-import model.comand.RotateRightComand;
 import view.MainForm;
 import view.MainFormDelegate;
+
+import java.awt.*;
 
 import static java.lang.Math.abs;
 
@@ -37,7 +36,8 @@ public class MainFormController implements MainFormDelegate, iComandInvokerDeleg
                 builder = builder
                         .setX(x)
                         .setY(y);
-            } break;
+            }
+            break;
             case END_POINT: {
                 MainForm.canvasPanel.setEnd(x, y);
                 System.out.println("End " + x + "," + y);
@@ -75,8 +75,10 @@ public class MainFormController implements MainFormDelegate, iComandInvokerDeleg
     }
 
     @Override
-    public void didFinishedQueue() {
+    public void didFinishedQueue(Point lastPoint) {
         //todo show something
-        //builder = new RobotBuilder(robot);
+        builder = builder
+                .setX(lastPoint.x)
+                .setY(lastPoint.y);
     }
 }
