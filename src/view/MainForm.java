@@ -60,6 +60,11 @@ public class MainForm extends JFrame {
 
         btnClear.addActionListener(e -> {
             //todo clear
+            if (delegate != null) {
+                delegate.didClickOnCanvas(-1, -1, EditingMode.START_POINT);
+                delegate.didClickOnCanvas(-1, -1, EditingMode.END_POINT);
+                mode = EditingMode.START_POINT;
+            }
         });
 
         cmbDirection.addActionListener(e -> {

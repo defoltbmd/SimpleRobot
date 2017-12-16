@@ -70,6 +70,10 @@ public class MainFormController implements MainFormDelegate, iComandInvokerDeleg
     }
 
     @Override
+    public void didClear() {
+    }
+
+    @Override
     public void didCompletedComand() {
         //todo redraw robot
     }

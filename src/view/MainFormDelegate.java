@@ -8,5 +8,7 @@ public interface MainFormDelegate {
 
     void didStart();
 
+    void didClear();
+
     void didPickDirection(AbstractRobot.Direction direction);
 }
